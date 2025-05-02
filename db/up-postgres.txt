@@ -1,0 +1,1 @@
+docker run --name db-postgres -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 -e POSTGRES_DB=dbapp -p 5432:5432 -d postgres

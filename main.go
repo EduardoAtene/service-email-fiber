@@ -1,8 +1,10 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 
+	"github.com/EduardoAtene/service-email-fiber/db"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 )
@@ -13,6 +15,8 @@ const (
 
 func main() {
 	app := incializeApp()
+
+	incializeDb()
 
 	v1 := app.Group("v1")
 	email := v1.Group(prefixEmailConst)
@@ -39,4 +43,13 @@ func incializeApp() (app *fiber.App) {
 	}))
 
 	return
+}
+
+func incializeDb() *sql.DB {
+	db, err := db.OpenConnection()
+	if err != nil {
+		panic(err)
+	}
+
+	return db
 }
